@@ -7,7 +7,7 @@ import Html.Events exposing (onClick)
 import List.Extra
 
 import Functions exposing (historia)
-import Styles exposing (flexcontainer, textStyle)
+import Styles exposing (flexcontainer, textStyle, center)
 import Types exposing (Model, Msg(Vuelta,Add))
 
 
@@ -16,23 +16,19 @@ view model =
   case model.eval of
 
       True ->
-        div [ style [("text-align","center")] ]
+        div [ style [ ("text-align","center"), ("padding", "30px") ] ]
         [ button
           [ onClick Add
           , style
-            [ ("width", "375px")
-            , ("margin-left", "auto")
-            , ("margin-right", "auto")
-            , ("margin-top", "45px")
+            [ ("width", "250px")
+            , ("margin-bottom", "40px")
             ]
           , textStyle False "0.75em"
+          , center
           ]
           [ text "Nuevo requisito" ]
         , div
-          [ flexcontainer "row"
-          , style
-            [ ("padding", "40px") ]
-          ]
+          [ flexcontainer "row" ]
           (List.indexedMap (historia model.eval) model.tareas)
         ]
 
@@ -40,11 +36,11 @@ view model =
         div
           [ flexcontainer "column"
           , style
-            [ ("padding", "45px") ]
+            [ ("padding", "30px") ]
           ]
           [ div
             [ style
-              [ ("margin-bottom", "40px")
+              [ ("margin-bottom", "60px")
               , ("text-decoration", "underline")
               ]
             , textStyle True "1.5em"
@@ -53,12 +49,11 @@ view model =
           , button
             [ onClick Vuelta
             , style
-              [ ("width", "345px")
-              , ("margin-left", "auto")
-              , ("margin-right", "auto")
-              , ("margin-bottom", "45px")
+              [ ("width", "250px")
+              , ("margin-bottom", "40px")
               ]
             , textStyle False "0.75em"
+            , center
             ]
             [ text "Volver al trabajo" ]
           , historia

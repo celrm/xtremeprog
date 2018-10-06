@@ -35,3 +35,9 @@ textStyle negrita tam =
   , ("font-family", "Courier New")--"courier")
   , ("font-weight", (if negrita then "bold" else "normal"))
   ]
+
+center =
+  style
+  [ ("margin-left", "auto")
+  , ("margin-right", "auto")
+  ]

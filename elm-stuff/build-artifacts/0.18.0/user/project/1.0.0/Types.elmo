@@ -1,0 +1,10 @@
+var _user$project$Types$Model = F4(
+	function (a, b, c, d) {
+		return {todo: a, tareas: b, $eval: c, numerito: d};
+	});
+var _user$project$Types$Add = {ctor: 'Add'};
+var _user$project$Types$Vuelta = {ctor: 'Vuelta'};
+var _user$project$Types$Cambiar = F3(
+	function (a, b, c) {
+		return {ctor: 'Cambiar', _0: a, _1: b, _2: c};
+	});

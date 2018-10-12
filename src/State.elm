@@ -2,14 +2,13 @@ module State exposing (init, update, subscriptions)
 
 import List.Extra
 
-import Types exposing (Model, Tarjeta, Msg(Cambiar,Vuelta,Add,Evaluar))
+import Types exposing (..)
 
 --"Grupo de folk dodecafónico flamenco"
 
 --HISTORIA 1: INFORMACIÓN
 
    {- Después de varios años en el mundo de la música y haber llevado a cabo varios proyectos, este año hemos decidido experimentar un nuevo género, el "folk dodecafónico flamenco", en el cual tenemos mucha ilusión. Aún no sabemos por qué la cosa no va del todo bien y necesitamos una página web que nos permita darnos a conocer, de modo que más gente se interese por nuestro trabajo. -}
-
 
 --HISTORIA 2: MUSICA
 
@@ -54,7 +53,7 @@ h3 =
 
 init : (Model, Cmd Msg)
 init =
-  (Model [ h1, h2, h3 ] [] True 0, Cmd.none)
+  (Model [ h1, h2, h3 ] [] True 0 "", Cmd.none)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -120,6 +119,29 @@ update msg model =
               h
               ( Tuple.mapSecond List.reverse )
               model.tareas
+        }
+      , Cmd.none)
+
+    Input str ->
+      ( { model
+          | str = str
+        }
+      , Cmd.none)
+
+    NuevaTarea ->
+      ( { model
+          | tareas =
+              ( List.Extra.updateAt
+                model.numerito
+                ( Tuple.mapSecond
+                  ( \lista ->
+                    lista ++
+                    [ Tarjeta (List.length lista + 1) model.str False ]
+                  )
+                )
+                model.tareas
+              )
+          , str = ""
         }
       , Cmd.none)
 

@@ -9801,6 +9801,13 @@ var _user$project$Types$Model = F4(
 	function (a, b, c, d) {
 		return {todo: a, tareas: b, $eval: c, numerito: d};
 	});
+var _user$project$Types$Tarjeta = F3(
+	function (a, b, c) {
+		return {number: a, description: b, done: c};
+	});
+var _user$project$Types$Evaluar = function (a) {
+	return {ctor: 'Evaluar', _0: a};
+};
 var _user$project$Types$Add = {ctor: 'Add'};
 var _user$project$Types$Vuelta = {ctor: 'Vuelta'};
 var _user$project$Types$Cambiar = F3(
@@ -9858,7 +9865,11 @@ var _user$project$Styles$nonselect = _elm_lang$html$Html_Attributes$style(
 					_1: {
 						ctor: '::',
 						_0: {ctor: '_Tuple2', _0: 'user-select', _1: 'none'},
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'},
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}
@@ -9899,9 +9910,7 @@ var _user$project$Functions$emptycell = A2(
 		_1: {ctor: '[]'}
 	});
 var _user$project$Functions$tarjeta = F3(
-	function (h, i, _p0) {
-		var _p1 = _p0;
-		var _p2 = _p1._1;
+	function (h, i, t) {
 		return A2(
 			_elm_lang$html$Html$table,
 			{
@@ -9950,34 +9959,30 @@ var _user$project$Functions$tarjeta = F3(
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onClick(
-										A3(_user$project$Types$Cambiar, _p2, h, i)),
+										A3(_user$project$Types$Cambiar, t.done, h, i)),
 									_1: {
 										ctor: '::',
 										_0: _elm_lang$html$Html_Attributes$style(
 											{
 												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'width', _1: '30px'},
+												_0: {ctor: '_Tuple2', _0: 'width', _1: '40px'},
 												_1: {
 													ctor: '::',
 													_0: {
 														ctor: '_Tuple2',
 														_0: 'background',
-														_1: _p2 ? '#01DF01' : 'red'
+														_1: t.done ? '#01DF01' : 'red'
 													},
 													_1: {
 														ctor: '::',
 														_0: {ctor: '_Tuple2', _0: 'border', _1: '2px solid black'},
-														_1: {
-															ctor: '::',
-															_0: {ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'},
-															_1: {ctor: '[]'}
-														}
+														_1: {ctor: '[]'}
 													}
 												}
 											}),
 										_1: {
 											ctor: '::',
-											_0: A2(_user$project$Styles$textStyle, true, '20px'),
+											_0: A2(_user$project$Styles$textStyle, true, '30px'),
 											_1: {
 												ctor: '::',
 												_0: _user$project$Styles$nonselect,
@@ -9989,7 +9994,7 @@ var _user$project$Functions$tarjeta = F3(
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html$text(
-										_p2 ? '✔' : '✗'),
+										t.done ? '✔' : '✗'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -10018,7 +10023,7 @@ var _user$project$Functions$tarjeta = F3(
 									_0: _elm_lang$html$Html_Attributes$style(
 										{
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'width', _1: '200px'},
+											_0: {ctor: '_Tuple2', _0: 'width', _1: '250px'},
 											_1: {
 												ctor: '::',
 												_0: {ctor: '_Tuple2', _0: 'background', _1: _user$project$Styles$fondo},
@@ -10045,7 +10050,7 @@ var _user$project$Functions$tarjeta = F3(
 										A2(
 											_elm_lang$core$Basics_ops['++'],
 											'Tarea ',
-											_elm_lang$core$Basics$toString(i + 1))),
+											_elm_lang$core$Basics$toString(t.number))),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -10096,7 +10101,7 @@ var _user$project$Functions$tarjeta = F3(
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text(_p1._0),
+										_0: _elm_lang$html$Html$text(t.description),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
@@ -10112,9 +10117,9 @@ var _user$project$Functions$tarjeta = F3(
 	});
 var _user$project$Functions$historia = F3(
 	function (b, h, tareas) {
-		var _p3 = tareas;
-		var descripcion = _p3._0;
-		var lista = _p3._1;
+		var _p0 = tareas;
+		var descripcion = _p0._0;
+		var lista = _p0._1;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -10159,8 +10164,17 @@ var _user$project$Functions$historia = F3(
 							_elm_lang$html$Html$p,
 							{
 								ctor: '::',
-								_0: A2(_user$project$Styles$textStyle, false, '1.5em'),
-								_1: {ctor: '[]'}
+								_0: _elm_lang$html$Html_Events$onClick(
+									_user$project$Types$Evaluar(h)),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Styles$nonselect,
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Styles$textStyle, false, '1.5em'),
+										_1: {ctor: '[]'}
+									}
+								}
 							},
 							{
 								ctor: '::',
@@ -10189,7 +10203,7 @@ var _user$project$Functions$historia = F3(
 												_0: {
 													ctor: '_Tuple2',
 													_0: 'width',
-													_1: b ? '250px' : 'auto'
+													_1: b ? '310px' : 'auto'
 												},
 												_1: {
 													ctor: '::',
@@ -10265,7 +10279,9 @@ var _user$project$Functions$historia = F3(
 									return A2(
 										_elm_lang$core$Basics$xor,
 										b,
-										_elm_lang$core$Tuple$second(t));
+										function (_) {
+											return _.done;
+										}(t));
 								},
 								lista))),
 					_1: {ctor: '[]'}
@@ -10296,12 +10312,14 @@ var _user$project$State$update = F2(
 								A2(_elm_community$list_extra$List_Extra$removeAt, _p5, _p3),
 								{
 									ctor: '::',
-									_0: A2(
-										_elm_lang$core$Tuple$mapSecond,
-										_elm_lang$core$Basics$not,
+									_0: function (t) {
+										return _elm_lang$core$Native_Utils.update(
+											t,
+											{done: !t.done});
+									}(
 										A2(
 											_elm_lang$core$Maybe$withDefault,
-											{ctor: '_Tuple2', _0: '', _1: true},
+											A3(_user$project$Types$Tarjeta, 1, '', true),
 											A2(_elm_community$list_extra$List_Extra$getAt, _p5, _p3))),
 									_1: {ctor: '[]'}
 								})
@@ -10316,7 +10334,9 @@ var _user$project$State$update = F2(
 							tareas: nuevasTareas,
 							$eval: A2(
 								_elm_lang$core$List$all,
-								_elm_lang$core$Tuple$second,
+								function (_) {
+									return _.done;
+								},
 								_elm_lang$core$Tuple$second(
 									A2(
 										_elm_lang$core$Maybe$withDefault,
@@ -10344,7 +10364,7 @@ var _user$project$State$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
+			case 'Vuelta':
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -10359,37 +10379,37 @@ var _user$project$State$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			default:
+				var _p6 = _p0._0;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							numerito: _p6,
+							$eval: false,
+							tareas: A3(
+								_elm_community$list_extra$List_Extra$updateAt,
+								_p6,
+								_elm_lang$core$Tuple$mapSecond(_elm_lang$core$List$reverse),
+								model.tareas)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 		}
 	});
-var _user$project$State$h4 = {
-	ctor: '_Tuple2',
-	_0: 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola',
-	_1: {
-		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'hola hola hola hola', _1: false},
-		_1: {
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola', _1: false},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola hola', _1: false},
-				_1: {ctor: '[]'}
-			}
-		}
-	}
-};
 var _user$project$State$h3 = {
 	ctor: '_Tuple2',
-	_0: 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola',
+	_0: 'Elaborar tienda online de entradas, merch...',
 	_1: {
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'hola hola hola hola', _1: false},
+		_0: A3(_user$project$Types$Tarjeta, 1, 'Métodos de pago: Tarjeta, Paypal', false),
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola', _1: false},
+			_0: A3(_user$project$Types$Tarjeta, 2, 'Catálogo de merchandising', false),
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola hola', _1: false},
+				_0: A3(_user$project$Types$Tarjeta, 3, 'Venta de entradas', false),
 				_1: {ctor: '[]'}
 			}
 		}
@@ -10397,16 +10417,16 @@ var _user$project$State$h3 = {
 };
 var _user$project$State$h2 = {
 	ctor: '_Tuple2',
-	_0: 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola',
+	_0: 'Necesitamos dar a conocer nuestra obra.',
 	_1: {
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'hola hola hola hola', _1: false},
+		_0: A3(_user$project$Types$Tarjeta, 1, 'Pestaña con nuestra discografía', false),
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola', _1: false},
+			_0: A3(_user$project$Types$Tarjeta, 2, 'Reproducir música mediante Spotify', false),
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola hola', _1: false},
+				_0: A3(_user$project$Types$Tarjeta, 3, 'Descargar música', false),
 				_1: {ctor: '[]'}
 			}
 		}
@@ -10414,18 +10434,14 @@ var _user$project$State$h2 = {
 };
 var _user$project$State$h1 = {
 	ctor: '_Tuple2',
-	_0: 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola',
+	_0: 'Queremos una web visualmente atractiva.',
 	_1: {
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'hola hola hola hola', _1: false},
+		_0: A3(_user$project$Types$Tarjeta, 1, 'Pestaña de información general', false),
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola', _1: false},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola hola', _1: false},
-				_1: {ctor: '[]'}
-			}
+			_0: A3(_user$project$Types$Tarjeta, 2, 'Pestaña sobre conciertos', false),
+			_1: {ctor: '[]'}
 		}
 	}
 };
@@ -10435,22 +10451,18 @@ var _user$project$State$init = {
 		_user$project$Types$Model,
 		{
 			ctor: '::',
-			_0: _user$project$State$h2,
+			_0: _user$project$State$h1,
 			_1: {
 				ctor: '::',
-				_0: _user$project$State$h3,
+				_0: _user$project$State$h2,
 				_1: {
 					ctor: '::',
-					_0: _user$project$State$h4,
+					_0: _user$project$State$h3,
 					_1: {ctor: '[]'}
 				}
 			}
 		},
-		{
-			ctor: '::',
-			_0: _user$project$State$h1,
-			_1: {ctor: '[]'}
-		},
+		{ctor: '[]'},
 		true,
 		0),
 	_1: _elm_lang$core$Platform_Cmd$none
@@ -10489,7 +10501,7 @@ var _user$project$View$view = function (model) {
 									_0: {ctor: '_Tuple2', _0: 'width', _1: '250px'},
 									_1: {
 										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'margin-bottom', _1: '40px'},
+										_0: {ctor: '_Tuple2', _0: 'margin-bottom', _1: '20px'},
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -10536,7 +10548,7 @@ var _user$project$View$view = function (model) {
 					_0: _elm_lang$html$Html_Attributes$style(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'padding', _1: '30px'},
+							_0: {ctor: '_Tuple2', _0: 'padding', _1: '100px'},
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -10551,7 +10563,7 @@ var _user$project$View$view = function (model) {
 						_0: _elm_lang$html$Html_Attributes$style(
 							{
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'margin-bottom', _1: '60px'},
+								_0: {ctor: '_Tuple2', _0: 'margin-bottom', _1: '100px'},
 								_1: {
 									ctor: '::',
 									_0: {ctor: '_Tuple2', _0: 'text-decoration', _1: 'underline'},

@@ -89,7 +89,7 @@ var _user$project$State$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
+			case 'Evaluar':
 				var _p6 = _p0._0;
 				return {
 					ctor: '_Tuple2',
@@ -103,6 +103,43 @@ var _user$project$State$update = F2(
 								_p6,
 								_elm_lang$core$Tuple$mapSecond(_elm_lang$core$List$reverse),
 								model.tareas)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Input':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{str: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							tareas: A3(
+								_elm_community$list_extra$List_Extra$updateAt,
+								model.numerito,
+								_elm_lang$core$Tuple$mapSecond(
+									function (lista) {
+										return A2(
+											_elm_lang$core$Basics_ops['++'],
+											lista,
+											{
+												ctor: '::',
+												_0: A3(
+													_user$project$Types$Tarjeta,
+													_elm_lang$core$List$length(lista) + 1,
+													model.str,
+													false),
+												_1: {ctor: '[]'}
+											});
+									}),
+								model.tareas),
+							str: ''
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
@@ -157,7 +194,7 @@ var _user$project$State$h1 = {
 };
 var _user$project$State$init = {
 	ctor: '_Tuple2',
-	_0: A4(
+	_0: A5(
 		_user$project$Types$Model,
 		{
 			ctor: '::',
@@ -174,6 +211,7 @@ var _user$project$State$init = {
 		},
 		{ctor: '[]'},
 		true,
-		0),
+		0,
+		''),
 	_1: _elm_lang$core$Platform_Cmd$none
 };

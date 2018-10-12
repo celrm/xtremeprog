@@ -1,14 +1,14 @@
 module View exposing (view)
 
-import Html exposing (Html, tr, td, text, div, br, button)
-import Html.Attributes exposing (style)
-import Html.Events exposing (onClick)
+import Html exposing (Html, tr, td, text, div, br, button, input)
+import Html.Attributes exposing (style, value)
+import Html.Events exposing (onClick, onInput)
 
 import List.Extra
 
 import Functions exposing (historia)
 import Styles exposing (flexcontainer, textStyle, center)
-import Types exposing (Model, Msg(Vuelta,Add))
+import Types exposing (..)
 
 
 view : Model -> Html Msg
@@ -21,7 +21,7 @@ view model =
           [ onClick Add
           , style
             [ ("width", "250px")
-            , ("margin-bottom", "20px")
+            --, ("margin-bottom", "20px")
             ]
           , textStyle False "0.75em"
           , center
@@ -66,4 +66,24 @@ view model =
                     model.tareas
                 )
               )
+          , input
+            [ onInput Input
+            , center
+            , textStyle False "0.75em"
+            , style
+              [ ("width", "50%")
+              , ("margin-bottom", "40px")
+              ]
+            , value model.str
+            ] []
+          , button
+            [ onClick NuevaTarea
+            , style
+              [ ("width", "250px")
+              , ("margin-bottom", "40px")
+              ]
+            , textStyle False "0.75em"
+            , center
+            ]
+            [ text "Nueva tarea" ]
           ]

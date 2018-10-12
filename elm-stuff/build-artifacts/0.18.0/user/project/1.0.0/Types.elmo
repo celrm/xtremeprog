@@ -1,11 +1,15 @@
-var _user$project$Types$Model = F4(
-	function (a, b, c, d) {
-		return {todo: a, tareas: b, $eval: c, numerito: d};
+var _user$project$Types$Model = F5(
+	function (a, b, c, d, e) {
+		return {todo: a, tareas: b, $eval: c, numerito: d, str: e};
 	});
 var _user$project$Types$Tarjeta = F3(
 	function (a, b, c) {
 		return {number: a, description: b, done: c};
 	});
+var _user$project$Types$NuevaTarea = {ctor: 'NuevaTarea'};
+var _user$project$Types$Input = function (a) {
+	return {ctor: 'Input', _0: a};
+};
 var _user$project$Types$Evaluar = function (a) {
 	return {ctor: 'Evaluar', _0: a};
 };

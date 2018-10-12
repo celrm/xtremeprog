@@ -1,4 +1,4 @@
-module Types exposing (Model, Tarjeta, Msg(Cambiar,Vuelta,Add,Evaluar))
+module Types exposing (..)
 
 
 type alias Model =
@@ -6,6 +6,7 @@ type alias Model =
   , tareas : List (String, List Tarjeta)
   , eval : Bool
   , numerito : Int
+  , str : String
   }
 
 type alias Tarjeta =
@@ -19,3 +20,5 @@ type Msg
   | Vuelta
   | Add
   | Evaluar Int
+  | Input String
+  | NuevaTarea

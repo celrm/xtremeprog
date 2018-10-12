@@ -25,6 +25,7 @@ nonselect =
   , ("-moz-user-select","none")
   , ("-o-user-select","none")
   , ("user-select","none")
+  , ("cursor", "pointer")
   ]
 
 textStyle : Bool -> String -> Attribute msg

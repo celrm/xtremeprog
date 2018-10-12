@@ -22,12 +22,14 @@ var _user$project$State$update = F2(
 								A2(_elm_community$list_extra$List_Extra$removeAt, _p5, _p3),
 								{
 									ctor: '::',
-									_0: A2(
-										_elm_lang$core$Tuple$mapSecond,
-										_elm_lang$core$Basics$not,
+									_0: function (t) {
+										return _elm_lang$core$Native_Utils.update(
+											t,
+											{done: !t.done});
+									}(
 										A2(
 											_elm_lang$core$Maybe$withDefault,
-											{ctor: '_Tuple2', _0: '', _1: true},
+											A3(_user$project$Types$Tarjeta, 1, '', true),
 											A2(_elm_community$list_extra$List_Extra$getAt, _p5, _p3))),
 									_1: {ctor: '[]'}
 								})
@@ -42,7 +44,9 @@ var _user$project$State$update = F2(
 							tareas: nuevasTareas,
 							$eval: A2(
 								_elm_lang$core$List$all,
-								_elm_lang$core$Tuple$second,
+								function (_) {
+									return _.done;
+								},
 								_elm_lang$core$Tuple$second(
 									A2(
 										_elm_lang$core$Maybe$withDefault,
@@ -70,7 +74,7 @@ var _user$project$State$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
+			case 'Vuelta':
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -85,37 +89,37 @@ var _user$project$State$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			default:
+				var _p6 = _p0._0;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							numerito: _p6,
+							$eval: false,
+							tareas: A3(
+								_elm_community$list_extra$List_Extra$updateAt,
+								_p6,
+								_elm_lang$core$Tuple$mapSecond(_elm_lang$core$List$reverse),
+								model.tareas)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 		}
 	});
-var _user$project$State$h4 = {
-	ctor: '_Tuple2',
-	_0: 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola',
-	_1: {
-		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'hola hola hola hola', _1: false},
-		_1: {
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola', _1: false},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola hola', _1: false},
-				_1: {ctor: '[]'}
-			}
-		}
-	}
-};
 var _user$project$State$h3 = {
 	ctor: '_Tuple2',
-	_0: 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola',
+	_0: 'Elaborar tienda online de entradas, merch...',
 	_1: {
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'hola hola hola hola', _1: false},
+		_0: A3(_user$project$Types$Tarjeta, 1, 'Métodos de pago: Tarjeta, Paypal', false),
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola', _1: false},
+			_0: A3(_user$project$Types$Tarjeta, 2, 'Catálogo de merchandising', false),
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola hola', _1: false},
+				_0: A3(_user$project$Types$Tarjeta, 3, 'Venta de entradas', false),
 				_1: {ctor: '[]'}
 			}
 		}
@@ -123,16 +127,16 @@ var _user$project$State$h3 = {
 };
 var _user$project$State$h2 = {
 	ctor: '_Tuple2',
-	_0: 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola',
+	_0: 'Necesitamos dar a conocer nuestra obra.',
 	_1: {
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'hola hola hola hola', _1: false},
+		_0: A3(_user$project$Types$Tarjeta, 1, 'Pestaña con nuestra discografía', false),
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola', _1: false},
+			_0: A3(_user$project$Types$Tarjeta, 2, 'Reproducir música mediante Spotify', false),
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola hola', _1: false},
+				_0: A3(_user$project$Types$Tarjeta, 3, 'Descargar música', false),
 				_1: {ctor: '[]'}
 			}
 		}
@@ -140,18 +144,14 @@ var _user$project$State$h2 = {
 };
 var _user$project$State$h1 = {
 	ctor: '_Tuple2',
-	_0: 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola',
+	_0: 'Queremos una web visualmente atractiva.',
 	_1: {
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'hola hola hola hola', _1: false},
+		_0: A3(_user$project$Types$Tarjeta, 1, 'Pestaña de información general', false),
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola', _1: false},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'hola hola hola hola hola hola', _1: false},
-				_1: {ctor: '[]'}
-			}
+			_0: A3(_user$project$Types$Tarjeta, 2, 'Pestaña sobre conciertos', false),
+			_1: {ctor: '[]'}
 		}
 	}
 };
@@ -161,22 +161,18 @@ var _user$project$State$init = {
 		_user$project$Types$Model,
 		{
 			ctor: '::',
-			_0: _user$project$State$h2,
+			_0: _user$project$State$h1,
 			_1: {
 				ctor: '::',
-				_0: _user$project$State$h3,
+				_0: _user$project$State$h2,
 				_1: {
 					ctor: '::',
-					_0: _user$project$State$h4,
+					_0: _user$project$State$h3,
 					_1: {ctor: '[]'}
 				}
 			}
 		},
-		{
-			ctor: '::',
-			_0: _user$project$State$h1,
-			_1: {ctor: '[]'}
-		},
+		{ctor: '[]'},
 		true,
 		0),
 	_1: _elm_lang$core$Platform_Cmd$none

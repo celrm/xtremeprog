@@ -2,52 +2,59 @@ module State exposing (init, update, subscriptions)
 
 import List.Extra
 
-import Types exposing (Model, Msg(Cambiar,Vuelta,Add))
+import Types exposing (Model, Tarjeta, Msg(Cambiar,Vuelta,Add,Evaluar))
+
+--"Grupo de folk dodecafónico flamenco"
+
+--HISTORIA 1: INFORMACIÓN
+
+   {- Después de varios años en el mundo de la música y haber llevado a cabo varios proyectos, este año hemos decidido experimentar un nuevo género, el "folk dodecafónico flamenco", en el cual tenemos mucha ilusión. Aún no sabemos por qué la cosa no va del todo bien y necesitamos una página web que nos permita darnos a conocer, de modo que más gente se interese por nuestro trabajo. -}
 
 
-h1 : (String, List (String, Bool))
+--HISTORIA 2: MUSICA
+
+    {- Bueno, parece que la cosa está empezando a despegar, hemos recaudado suficiente para la primera maqueta. -}
+
+--HISTORIA 3: DINEROS
+
+    {- Al parecer el dinero no crece en los árboles -}
+
+
+h1 : (String, List Tarjeta)
 h1 =
-  ("hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola",
-  [ ("hola hola hola hola", False)
-  , ("hola hola hola hola hola", False)
-  , ("hola hola hola hola hola hola", False)
+  ("Queremos una web visualmente atractiva.",
+  [ (Tarjeta 1 "Pestaña de información general" False)
+  --, ("Pestaña de noticias", False)
+  --, ("Pestaña de fotos", False)
+  , (Tarjeta 2 "Pestaña sobre conciertos" False)
   ]
   )
 
 
-h2 : (String, List (String, Bool))
+h2 : (String, List Tarjeta)
 h2 =
-  ("hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola",
-  [ ("hola hola hola hola", False)
-  , ("hola hola hola hola hola", False)
-  , ("hola hola hola hola hola hola", False)
+  ("Necesitamos dar a conocer nuestra obra.",
+  [ (Tarjeta 1 "Pestaña con nuestra discografía" False)
+  --, ("Subir música", False)
+  , (Tarjeta 2 "Reproducir música mediante Spotify" False)
+  , (Tarjeta 3 "Descargar música" False)
   ]
   )
 
 
-h3 : (String, List (String, Bool))
+h3 : (String, List Tarjeta)
 h3 =
-  ("hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola",
-  [ ("hola hola hola hola", False)
-  , ("hola hola hola hola hola", False)
-  , ("hola hola hola hola hola hola", False)
-  ]
-  )
-
-
-h4 : (String, List (String, Bool))
-h4 =
-  ("hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola",
-  [ ("hola hola hola hola", False)
-  , ("hola hola hola hola hola", False)
-  , ("hola hola hola hola hola hola", False)
+  ("Elaborar tienda online de entradas, merch...",
+  [ (Tarjeta 1 "Métodos de pago: Tarjeta, Paypal" False)
+  , (Tarjeta 2 "Catálogo de merchandising" False)
+  , (Tarjeta 3 "Venta de entradas" False)
   ]
   )
 
 
 init : (Model, Cmd Msg)
 init =
-  (Model [ h2, h3, h4 ] [ h1 ] True 0, Cmd.none)
+  (Model [ h1, h2, h3 ] [] True 0, Cmd.none)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -64,8 +71,8 @@ update msg model =
                   ++
                     [ lista
                         |> List.Extra.getAt i
-                        |> Maybe.withDefault ("", True)
-                        |> Tuple.mapSecond not
+                        |> Maybe.withDefault (Tarjeta 1 "" True)
+                        |> (\t -> {t | done = not t.done})
                     ]
                   )
                 )
@@ -79,7 +86,7 @@ update msg model =
                   |> List.Extra.getAt h
                   |> Maybe.withDefault ("",[])
                   |> Tuple.second
-                  |> List.all Tuple.second
+                  |> List.all .done
                 then False else model.eval
             , numerito = h
           }
@@ -103,6 +110,18 @@ update msg model =
             , eval = True
           }
         , Cmd.none)
+
+    Evaluar h ->
+      ( { model
+          | numerito = h
+          , eval = False
+          , tareas =
+              List.Extra.updateAt
+              h
+              ( Tuple.mapSecond List.reverse )
+              model.tareas
+        }
+      , Cmd.none)
 
 
 -- SUBSCRIPTIONS

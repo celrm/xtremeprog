@@ -2,6 +2,13 @@ var _user$project$Types$Model = F4(
 	function (a, b, c, d) {
 		return {todo: a, tareas: b, $eval: c, numerito: d};
 	});
+var _user$project$Types$Tarjeta = F3(
+	function (a, b, c) {
+		return {number: a, description: b, done: c};
+	});
+var _user$project$Types$Evaluar = function (a) {
+	return {ctor: 'Evaluar', _0: a};
+};
 var _user$project$Types$Add = {ctor: 'Add'};
 var _user$project$Types$Vuelta = {ctor: 'Vuelta'};
 var _user$project$Types$Cambiar = F3(

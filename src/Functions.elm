@@ -6,7 +6,7 @@ import Html.Events exposing (onClick)
 
 import List.Extra
 
-import Types exposing (Model, Msg(Cambiar))
+import Types exposing (Model,Tarjeta,Msg(Cambiar, Evaluar))
 import Styles exposing (fondo, flexcontainer, nonselect, textStyle, center)
 
 
@@ -15,8 +15,8 @@ emptycell =
   td [ style [ ("background", fondo) ] ] [ text " " ]
 
 
-tarjeta : Int -> Int -> (String, Bool) -> Html Msg
-tarjeta h i (str, hecho) =
+tarjeta : Int -> Int -> Tarjeta -> Html Msg
+tarjeta h i t =
   table
     [ style
       [ ("border-collapse", "collapse")
@@ -28,29 +28,28 @@ tarjeta h i (str, hecho) =
     [ tr [ style [ ("height", "30px") ] ]
       [ emptycell
       , td
-        [ onClick (Cambiar hecho h i)
+        [ onClick (Cambiar t.done h i)
         , style
-          [ ("width", "30px")
-          , ("background", (if hecho then "#01DF01" else "red"))
+          [ ("width", "40px")
+          , ("background", (if t.done then "#01DF01" else "red"))
           , ("border", "2px solid black")
-          , ("cursor", "pointer")
           ]
-        , textStyle True "20px"
+        , textStyle True "30px"
         , nonselect
         ]
-        [ text (if hecho then "✔" else "✗") ]
+        [ text (if t.done then "✔" else "✗") ]
       ]
     , tr [ style [ ("height", "40px") ] ]
       [ td
         [ style
-          [ ("width", "200px")
+          [ ("width", "250px")
           , ("background", fondo)
           , ("padding", "0px 0px 0px 30px")
           , ("text-decoration", "underline")
           ]
         , textStyle True "1.25em"
         ]
-        [ text ("Tarea " ++ toString (i + 1)) ]
+        [ text ("Tarea " ++ toString t.number) ]
       , emptycell
       ]
     , tr [ style [ ("height", "166px") ] ]
@@ -62,13 +61,13 @@ tarjeta h i (str, hecho) =
           ]
         , textStyle False "1em"
         ]
-        [ text str ]
+        [ text t.description ]
       , emptycell
       ]
     ]
 
 
-historia : Bool -> Int -> (String, List (String, Bool)) -> Html Msg
+historia : Bool -> Int -> (String, List Tarjeta) -> Html Msg
 historia b h tareas =
   let (descripcion, lista) = tareas
   in
@@ -84,9 +83,9 @@ historia b h tareas =
         [ ("margin-bottom", "14px") ]
         , center
       ]
-      [ p [textStyle False "1.5em"] [text ("Historia " ++ toString (h + 1) ++ ":")]
+      [ p [onClick (Evaluar h), nonselect, textStyle False "1.5em"] [text ("Historia " ++ toString (h + 1) ++ ":")]
       , p [ textStyle False "1em", style
-            [ ("width", (if b then "250px" else "auto"))
+            [ ("width", (if b then "310px" else "auto"))
             , ("text-align", "justify")
             ]
           ]
@@ -110,7 +109,7 @@ historia b h tareas =
             ]
         )
         ( List.filter
-          ( \t -> xor b (Tuple.second t) )
+          ( \t -> xor b (.done t) )
           lista
         )
       )

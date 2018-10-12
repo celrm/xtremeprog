@@ -21,7 +21,7 @@ view model =
           [ onClick Add
           , style
             [ ("width", "250px")
-            , ("margin-bottom", "40px")
+            , ("margin-bottom", "20px")
             ]
           , textStyle False "0.75em"
           , center
@@ -36,11 +36,11 @@ view model =
         div
           [ flexcontainer "column"
           , style
-            [ ("padding", "30px") ]
+            [ ("padding", "100px") ]
           ]
           [ div
             [ style
-              [ ("margin-bottom", "60px")
+              [ ("margin-bottom", "100px")
               , ("text-decoration", "underline")
               ]
             , textStyle True "1.5em"

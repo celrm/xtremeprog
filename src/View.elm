@@ -7,7 +7,7 @@ import Html.Events exposing (onClick, onInput)
 import List.Extra
 
 import Functions exposing (historia)
-import Styles exposing (flexcontainer, textStyle, center)
+import Styles exposing (buttonStyle, flexcontainer, textStyle, center)
 import Types exposing (..)
 
 
@@ -16,46 +16,33 @@ view model =
   case model.eval of
 
       True ->
-        div [ style [ ("text-align","center"), ("padding", "30px") ] ]
+        div
+        [ style "text-align" "center"
+        , style "padding" "30px"
+        ]
         [ button
-          [ onClick Add
-          , style
-            [ ("width", "250px")
-            --, ("margin-bottom", "20px")
-            ]
-          , textStyle False "0.75em"
-          , center
-          ]
+          ( buttonStyle Add )
           [ text "Nuevo requisito" ]
         , div
-          [ flexcontainer "row" ]
+          ( flexcontainer "row" )
           (List.indexedMap (historia model.eval) model.tareas)
         ]
 
       False ->
         div
-          [ flexcontainer "column"
-          , style
-            [ ("padding", "100px") ]
-          ]
-          [ div
-            [ style
-              [ ("margin-bottom", "100px")
-              , ("text-decoration", "underline")
-              ]
-            , textStyle True "1.5em"
-            ]
-            [ text "Prueba y evaluación" ]
-          , button
-            [ onClick Vuelta
-            , style
-              [ ("width", "250px")
-              , ("margin-bottom", "40px")
-              ]
-            , textStyle False "0.75em"
-            , center
-            ]
+          ( flexcontainer "column"
+          ++ [ style "padding" "30px" ]
+          )
+          [ button
+            ( buttonStyle Vuelta )
             [ text "Volver al trabajo" ]
+          , div
+            ([ style "padding" "50px"
+            , style "text-decoration" "underline"
+            ]
+            ++ textStyle True "1.5em"
+            )
+            [ text "Prueba y evaluación" ]
           , historia
               model.eval
               model.numerito
@@ -67,23 +54,15 @@ view model =
                 )
               )
           , input
-            [ onInput Input
-            , center
-            , textStyle False "0.75em"
-            , style
-              [ ("width", "50%")
-              , ("margin-bottom", "40px")
-              ]
+            ([ onInput Input
+            , style "width" "50%"
+            , style "margin-bottom" "40px"
             , value model.str
-            ] []
-          , button
-            [ onClick NuevaTarea
-            , style
-              [ ("width", "250px")
-              , ("margin-bottom", "40px")
-              ]
-            , textStyle False "0.75em"
-            , center
             ]
+            ++ center
+            ++ textStyle False "0.75em"
+            ) []
+          , button
+            ( buttonStyle NuevaTarea )
             [ text "Nueva tarea" ]
           ]

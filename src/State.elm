@@ -51,8 +51,8 @@ h3 =
   )
 
 
-init : (Model, Cmd Msg)
-init =
+init : () -> (Model, Cmd Msg)
+init _ =
   (Model [ h1, h2, h3 ] [] True 0 "", Cmd.none)
 
 

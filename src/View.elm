@@ -56,7 +56,7 @@ view model =
           , input
             ([ onInput Input
             , style "width" "50%"
-            , style "margin-bottom" "40px"
+            , style "margin" "75px"
             , value model.str
             ]
             ++ center

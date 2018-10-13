@@ -131,6 +131,7 @@ update msg model =
     NuevaTarea ->
       ( { model
           | tareas =
+              if model.str == "" then model.tareas else
               ( List.Extra.updateAt
                 model.numerito
                 ( Tuple.mapSecond

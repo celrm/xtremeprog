@@ -20,10 +20,11 @@ tarjeta h i t =
   table
     [ style "border-collapse" "collapse"
     , style "border" "3px solid black"
-    , style "margin-left" "8%"
-    , style "margin-right" "8%"
-    , style "height" "150px"
-    , style "width" "250px"
+    , style "margin-left" (if t.done && i /= 0 then "50px" else "0px")
+    , style "margin-rigth" (if t.done then "50px" else "0px")
+    , style "margin-bottom" "10%"
+    , style "width" "275px"
+    , style "height" "275px"
     ]
     [ tr
       [ style "height" "12.5%" ]
@@ -75,14 +76,14 @@ historia : Bool -> Int -> (String, List Tarjeta) -> Html Msg
 historia b h (descripcion, lista) =
     div
     (
-    [ style "width" "250px" ]
+    [ style "width" (if b then "275px" else "100%") ]
     ++
     flexcontainer "column"
     ++ center
     )
     [ div
       (
-      [ style "margin-bottom" "14px" ]
+      [ style "margin-bottom" "20px" ]
       ++ center
       )
       [ p
@@ -94,27 +95,27 @@ historia b h (descripcion, lista) =
         [ text ("Historia " ++ Debug.toString (h + 1) ++ ":") ]
       , p
         ( textStyle False "1em" ++
-        [ style "width" (if b then "50%" else "auto")
-        , style "text-align" "center"
+        [ style "text-align" "justify"
+        --, style "width" "auto"
+        --, style "margin" "auto"
         ]
         )
         [ text descripcion ]
       ]
 
     , div
-      ([ style "margin-bottom" "30px"
-      , style "justify-content" "center"
-      , style "flex-wrap" "wrap"
-      ]++ flexcontainer (if b then "column" else "row") ++
-       center
+      ([ style "flex-wrap" "wrap"
+      --, style "margin-bottom" "20px"
+      --, style "justify-content" "center"
+      ]
+      ++ flexcontainer (if b then "column" else "row")
+      ++ center
       )
       ( List.indexedMap
         ( \i tarea ->
           div
             []
-            [ tarjeta h i tarea
-            , br [] []
-            ]
+            [ tarjeta h i tarea ]
         )
         ( List.filter
           ( \t -> xor b (.done t) )

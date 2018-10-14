@@ -37,7 +37,7 @@ view model =
             ( buttonStyle Vuelta )
             [ text "Volver al trabajo" ]
           , div
-            ([ style "padding" "50px"
+            ([ style "padding" "30px"
             , style "text-decoration" "underline"
             ]
             ++ textStyle True "1.5em"

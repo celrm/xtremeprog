@@ -6,6 +6,9 @@ import Html.Events exposing (onClick)
 import Types exposing (Msg)
 
 
+size : String
+size = "200px"
+
 fondo : String
 fondo =
   --"#58D3F7"
@@ -45,9 +48,10 @@ center =
 buttonStyle : msg -> List (Attribute msg)
 buttonStyle function =
   [ onClick function
-  , style "width" "250px"
+  , style "width" size
   , style "cursor" "pointer"
-  , style "padding" "auto"
+  , style "padding" "5px"
+  --, style "padding" "auto"
   ]
   ++ textStyle False "0.75em"
   ++ center

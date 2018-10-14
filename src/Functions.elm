@@ -7,7 +7,7 @@ import Html.Events exposing (onClick)
 import List.Extra
 
 import Types exposing (Model,Tarjeta,Msg(..))
-import Styles exposing (fondo, flexcontainer, nonselect, textStyle, center)
+import Styles exposing (size, fondo, flexcontainer, nonselect, textStyle, center)
 
 
 emptycell : Html Msg
@@ -19,12 +19,12 @@ tarjeta : Int -> Int -> Tarjeta -> Html Msg
 tarjeta h i t =
   table
     [ style "border-collapse" "collapse"
-    , style "border" "3px solid black"
+    , style "border" "2.5px solid black"
     , style "margin-left" (if t.done && i /= 0 then "50px" else "0px")
     , style "margin-rigth" (if t.done then "50px" else "0px")
     , style "margin-bottom" "10%"
-    , style "width" "275px"
-    , style "height" "275px"
+    , style "width" size
+    , style "height" size
     ]
     [ tr
       [ style "height" "12.5%" ]
@@ -76,7 +76,7 @@ historia : Bool -> Int -> (String, List Tarjeta) -> Html Msg
 historia b h (descripcion, lista) =
     div
     (
-    [ style "width" (if b then "275px" else "100%") ]
+    [ style "width" (if b then size else "100%") ]
     ++
     flexcontainer "column"
     ++ center
@@ -88,7 +88,7 @@ historia b h (descripcion, lista) =
       )
       [ p
         (
-        [ onClick (Evaluar h) ]
+        (if b then [ onClick (Evaluar h) ] else [])
         ++ nonselect
         ++ textStyle False "1.5em"
         )

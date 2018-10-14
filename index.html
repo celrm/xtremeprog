@@ -5249,7 +5249,7 @@ var author$project$State$update = F2(
 						model,
 						{
 							str: '',
-							tareas: A3(
+							tareas: (model.str === '') ? model.tareas : A3(
 								elm_community$list_extra$List$Extra$updateAt,
 								model.numerito,
 								elm$core$Tuple$mapSecond(
@@ -5313,6 +5313,7 @@ var author$project$Styles$nonselect = _List_fromArray(
 		A2(elm$html$Html$Attributes$style, 'user-select', 'none'),
 		A2(elm$html$Html$Attributes$style, 'cursor', 'pointer')
 	]);
+var author$project$Styles$size = '200px';
 var author$project$Styles$textStyle = F2(
 	function (negrita, tam) {
 		return _List_fromArray(
@@ -5330,6 +5331,7 @@ var author$project$Types$Cambiar = F3(
 	function (a, b, c) {
 		return {$: 'Cambiar', a: a, b: b, c: c};
 	});
+var elm$core$Basics$neq = _Utils_notEqual;
 var elm$core$Debug$toString = _Debug_toString;
 var elm$html$Html$table = _VirtualDom_node('table');
 var elm$html$Html$tr = _VirtualDom_node('tr');
@@ -5357,11 +5359,18 @@ var author$project$Functions$tarjeta = F3(
 			_List_fromArray(
 				[
 					A2(elm$html$Html$Attributes$style, 'border-collapse', 'collapse'),
-					A2(elm$html$Html$Attributes$style, 'border', '3px solid black'),
-					A2(elm$html$Html$Attributes$style, 'margin-left', '8%'),
-					A2(elm$html$Html$Attributes$style, 'margin-right', '8%'),
-					A2(elm$html$Html$Attributes$style, 'height', '150px'),
-					A2(elm$html$Html$Attributes$style, 'width', '250px')
+					A2(elm$html$Html$Attributes$style, 'border', '2.5px solid black'),
+					A2(
+					elm$html$Html$Attributes$style,
+					'margin-left',
+					(t.done && i) ? '50px' : '0px'),
+					A2(
+					elm$html$Html$Attributes$style,
+					'margin-rigth',
+					t.done ? '50px' : '0px'),
+					A2(elm$html$Html$Attributes$style, 'margin-bottom', '10%'),
+					A2(elm$html$Html$Attributes$style, 'width', author$project$Styles$size),
+					A2(elm$html$Html$Attributes$style, 'height', author$project$Styles$size)
 				]),
 			_List_fromArray(
 				[
@@ -5476,7 +5485,6 @@ var elm$core$List$filter = F2(
 			_List_Nil,
 			list);
 	});
-var elm$html$Html$br = _VirtualDom_node('br');
 var elm$html$Html$div = _VirtualDom_node('div');
 var elm$html$Html$p = _VirtualDom_node('p');
 var author$project$Functions$historia = F3(
@@ -5488,7 +5496,10 @@ var author$project$Functions$historia = F3(
 			_Utils_ap(
 				_List_fromArray(
 					[
-						A2(elm$html$Html$Attributes$style, 'width', '250px')
+						A2(
+						elm$html$Html$Attributes$style,
+						'width',
+						b ? author$project$Styles$size : '100%')
 					]),
 				_Utils_ap(
 					author$project$Styles$flexcontainer('column'),
@@ -5500,7 +5511,7 @@ var author$project$Functions$historia = F3(
 					_Utils_ap(
 						_List_fromArray(
 							[
-								A2(elm$html$Html$Attributes$style, 'margin-bottom', '14px')
+								A2(elm$html$Html$Attributes$style, 'margin-bottom', '20px')
 							]),
 						author$project$Styles$center),
 					_List_fromArray(
@@ -5508,11 +5519,11 @@ var author$project$Functions$historia = F3(
 							A2(
 							elm$html$Html$p,
 							_Utils_ap(
-								_List_fromArray(
+								b ? _List_fromArray(
 									[
 										elm$html$Html$Events$onClick(
 										author$project$Types$Evaluar(h))
-									]),
+									]) : _List_Nil,
 								_Utils_ap(
 									author$project$Styles$nonselect,
 									A2(author$project$Styles$textStyle, false, '1.5em'))),
@@ -5527,11 +5538,7 @@ var author$project$Functions$historia = F3(
 								A2(author$project$Styles$textStyle, false, '1em'),
 								_List_fromArray(
 									[
-										A2(
-										elm$html$Html$Attributes$style,
-										'width',
-										b ? '50%' : 'auto'),
-										A2(elm$html$Html$Attributes$style, 'text-align', 'center')
+										A2(elm$html$Html$Attributes$style, 'text-align', 'justify')
 									])),
 							_List_fromArray(
 								[
@@ -5543,8 +5550,6 @@ var author$project$Functions$historia = F3(
 					_Utils_ap(
 						_List_fromArray(
 							[
-								A2(elm$html$Html$Attributes$style, 'margin-bottom', '30px'),
-								A2(elm$html$Html$Attributes$style, 'justify-content', 'center'),
 								A2(elm$html$Html$Attributes$style, 'flex-wrap', 'wrap')
 							]),
 						_Utils_ap(
@@ -5560,8 +5565,7 @@ var author$project$Functions$historia = F3(
 									_List_Nil,
 									_List_fromArray(
 										[
-											A3(author$project$Functions$tarjeta, h, i, tarea),
-											A2(elm$html$Html$br, _List_Nil, _List_Nil)
+											A3(author$project$Functions$tarjeta, h, i, tarea)
 										]));
 							}),
 						A2(
@@ -5579,9 +5583,9 @@ var author$project$Styles$buttonStyle = function (_function) {
 		_List_fromArray(
 			[
 				elm$html$Html$Events$onClick(_function),
-				A2(elm$html$Html$Attributes$style, 'width', '250px'),
+				A2(elm$html$Html$Attributes$style, 'width', author$project$Styles$size),
 				A2(elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-				A2(elm$html$Html$Attributes$style, 'padding', 'auto')
+				A2(elm$html$Html$Attributes$style, 'padding', '5px')
 			]),
 		_Utils_ap(
 			A2(author$project$Styles$textStyle, false, '0.75em'),
@@ -5687,7 +5691,7 @@ var author$project$View$view = function (model) {
 					_Utils_ap(
 						_List_fromArray(
 							[
-								A2(elm$html$Html$Attributes$style, 'padding', '50px'),
+								A2(elm$html$Html$Attributes$style, 'padding', '30px'),
 								A2(elm$html$Html$Attributes$style, 'text-decoration', 'underline')
 							]),
 						A2(author$project$Styles$textStyle, true, '1.5em')),
@@ -5710,7 +5714,7 @@ var author$project$View$view = function (model) {
 							[
 								elm$html$Html$Events$onInput(author$project$Types$Input),
 								A2(elm$html$Html$Attributes$style, 'width', '50%'),
-								A2(elm$html$Html$Attributes$style, 'margin-bottom', '40px'),
+								A2(elm$html$Html$Attributes$style, 'margin', '75px'),
 								elm$html$Html$Attributes$value(model.str)
 							]),
 						_Utils_ap(
